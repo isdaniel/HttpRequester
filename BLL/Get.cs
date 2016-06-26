@@ -10,16 +10,31 @@ namespace BLL
 {
     public class Get : IMethod
     {
+        /// <summary>
+        ///
+        /// </summary>
         private Dictionary<string, string> _Parameters;
 
+        /// <summary>
+        ///
+        /// </summary>
         private string _Url;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="targetUrl"></param>
+        /// <param name="parameters"></param>
         public Get(string targetUrl, Dictionary<string, string> parameters)
         {
             this._Parameters = parameters;
             this._Url = targetUrl + "?";
         }
 
+        /// <summary>
+        /// HttpGet請求
+        /// </summary>
+        /// <returns>Get的二進制流返回值</returns>
         public byte[] StreamByte()
         {
             UrlWithParameter();

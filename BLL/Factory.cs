@@ -10,21 +10,38 @@ namespace BLL
 {
     public class Factory
     {
+        /// <summary>
+        /// 參數
+        /// </summary>
         private Dictionary<string, string> _Parameters;
-        private string _Url;
 
+        /// <summary>
+        /// 網址
+        /// </summary>
+        private string _Url;//
+
+        /// <summary>
+        /// 初始化網址的參數
+        /// </summary>
+        /// <param name="url">網址</param>
+        /// <param name="parameter"><參數/param>
         public Factory(string url, Dictionary<string, string> parameter)
         {
             this._Parameters = parameter;
             this._Url = url;
         }
 
+        /// <summary>
+        /// 取得Http所使用的模式
+        /// </summary>
+        /// <param name="type">Http類型(Get,Post..)</param>
+        /// <returns></returns>
         public IMethod GetInstace(string type)
         {
             string assemblyName = ConfigurationManager.AppSettings["MethodNameSapce"];
             string ClassName = assemblyName + "." + type + "Method";
-            IFactoryMethod MethodObj = (IFactoryMethod)Assembly.Load(assemblyName).
-                CreateInstance(ClassName);
+            IFactoryMethod MethodObj = (IFactoryMethod)Assembly.
+                Load(assemblyName).CreateInstance(ClassName);
             return MethodObj.GetInstance(_Url, _Parameters);
         }
     }

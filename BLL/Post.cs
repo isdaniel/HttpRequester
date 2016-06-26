@@ -10,10 +10,21 @@ namespace BLL
 {
     public class Post : IMethod
     {
+        /// <summary>
+        /// 參數
+        /// </summary>
         private Dictionary<string, string> _Parameters;
 
+        /// <summary>
+        /// 網址
+        /// </summary>
         private string _Url;
 
+        /// <summary>
+        /// 初始化Post模式
+        /// </summary>
+        /// <param name="targetUrl">網址</param>
+        /// <param name="parameters">參數</param>
         public Post(string targetUrl, Dictionary<string, string> parameters)
         {
             this._Parameters = parameters;
@@ -54,6 +65,10 @@ namespace BLL
             return RequsetData;
         }
 
+        /// <summary>
+        /// 將Post參數轉程二進制流
+        /// </summary>
+        /// <returns>二進制流的參數</returns>
         private byte[] ParameterToByte()
         {
             StringBuilder sb = new StringBuilder();
