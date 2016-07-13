@@ -41,12 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factory.cs" />
-    <Compile Include="GetMethod.cs" />
-    <Compile Include="IFactoryMethod.cs" />
     <Compile Include="Get.cs" />
-    <Compile Include="IMethod.cs" />
+    <Compile Include="MethodBase.cs" />
     <Compile Include="Post.cs" />
-    <Compile Include="PostMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,11 +17,19 @@ namespace CallWeb
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 取得參數的Key
+        /// </summary>
+        /// <returns>Key</returns>
         public string GetKey()
         {
             return txt_Key.Text;
         }
 
+        /// <summary>
+        /// 取得參數的value
+        /// </summary>
+        /// <returns>value</returns>
         public string GetValue()
         {
             return txt_Value.Text;

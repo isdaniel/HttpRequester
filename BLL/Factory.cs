@@ -18,7 +18,7 @@ namespace BLL
         /// <summary>
         /// 網址
         /// </summary>
-        private string _Url;//
+        private string _Url;
 
         /// <summary>
         /// 初始化網址的參數
@@ -36,13 +36,11 @@ namespace BLL
         /// </summary>
         /// <param name="type">Http類型(Get,Post..)</param>
         /// <returns></returns>
-        public IMethod GetInstace(string type)
+        public MethodBase GetInstace(string type)
         {
             string assemblyName = ConfigurationManager.AppSettings["MethodNameSapce"];
-            string ClassName = assemblyName + "." + type + "Method";
-            IFactoryMethod MethodObj = (IFactoryMethod)Assembly.
-                Load(assemblyName).CreateInstance(ClassName);
-            return MethodObj.GetInstance(_Url, _Parameters);
+            string ClassName = assemblyName + "." + type;
+            return (MethodBase)Assembly.Load(assemblyName).CreateInstance(ClassName, true, BindingFlags.Default, null, new object[] { _Url, _Parameters }, null, null);
         }
     }
 }

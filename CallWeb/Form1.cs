@@ -8,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -57,7 +56,7 @@ namespace CallWeb
             string url = txt_URL.Text;
             byte[] DataBytes = { 0 };
             Factory factory = new Factory(url, parameters);
-            IMethod MethodObj = factory.GetInstace(selectMethod);
+            MethodBase MethodObj = factory.GetInstace(selectMethod);
             DataBytes = MethodObj.StreamByte();
             list_data.Text = Encoding.UTF8.GetString(DataBytes);
         }
