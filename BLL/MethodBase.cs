@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,22 +38,31 @@ namespace BLL
         /// <returns>二進制流的返回值</returns>
         public byte[] StreamByte()
         {
+            LogWriter log = new LogWriter("MyLog");
             byte[] Data = { 0 };
-            HttpWebRequest request = GetWebRequest();//此方法會有子類來實做
-            using (HttpWebResponse response =
-                request.GetResponse() as HttpWebResponse)
+            try
             {
-                Stream stream = response.GetResponseStream();
-                MemoryStream memory = new MemoryStream();
-                stream.CopyTo(memory);
-                if (response.StatusCode == HttpStatusCode.OK)
+                HttpWebRequest request = GetWebRequest();//此方法會有子類來實做
+                using (HttpWebResponse response =
+                    request.GetResponse() as HttpWebResponse)
                 {
-                    Data = new byte[memory.Length];
-                    memory.Position = 0;
-                    memory.Read(Data, 0, Convert.ToInt32(memory.Length));
+                    Stream stream = response.GetResponseStream();
+                    MemoryStream memory = new MemoryStream();
+                    stream.CopyTo(memory);
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        Data = new byte[memory.Length];
+                        memory.Position = 0;
+                        memory.Read(Data, 0, Convert.ToInt32(memory.Length));
+                    }
+                    stream.Close();
+                    memory.Close();
+                    log.WriteLog("撈取成功");
                 }
-                stream.Close();
-                memory.Close();
+            }
+            catch (Exception ex)
+            {
+                log.WriteErrorLog("MethodBase錯誤", ex);
             }
             return Data;
         }
